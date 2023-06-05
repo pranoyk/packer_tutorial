@@ -1,21 +1,18 @@
 {
     "variables": {
-        "aws_access_key": "${AWS_ACCESS_KEY_ID}",
-        "aws_secret_key": "${AWS_SECRET_ACCESS_KEY}",
-        "vpc_region": "${VPC_REGION}",
-        "instance_type": "${INSTANCE_TYPE}",
-        "ssh_username": "${SSH_USERNAME}"
+        "aws_access_key": "",
+        "aws_secret_key": ""
       },
       "builders": [
         {
             "type": "amazon-ebs",
             "access_key": "{{user `aws_access_key`}}",
             "secret_key": "{{user `aws_secret_key`}}",
-            "region": "{{user `vpc_region`}}",
+            "region": "eu-north-1",
             "source_ami": "ami-042bae94a952c9eba",
-            "instance_type": "{{user `instance_type`}}",
-            "ssh_username": "{{user `ssh_username`}}",
-            "ami_name": "packer-training-example {{timestamp}}"
+            "instance_type": "t3.micro",
+            "ssh_username": "ec2-user",
+            "ami_name": "packer {{timestamp}}"
         }
       ],
       "provisioners": [
@@ -24,5 +21,5 @@
             "execute_command": "echo 'packer' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
             "script": "./bootstrap.sh"
         }
-]
+    ]
 }
