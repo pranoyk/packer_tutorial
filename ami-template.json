@@ -12,14 +12,14 @@
             "source_ami": "ami-042bae94a952c9eba",
             "instance_type": "t3.micro",
             "ssh_username": "ec2-user",
-            "ami_name": "packer {{timestamp}}"
+            "ami_name": "packer 1234qwer5678"
         }
       ],
       "provisioners": [
         {
             "type": "shell",
             "execute_command": "echo 'packer' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-            "script": "./bootstrap.sh"
+            "script": "../bootstrap.sh"
         }
     ]
 }
